@@ -7,8 +7,15 @@
  * @lint-ignore-every XPLATJSCOPYRIGHT1
  */
 
-import React, {Component} from 'react';
+import React from 'react';
+import {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+
+/*
+  TODO
+  - Add prettier
+  - Add tslint
+*/
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
