@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-standard",
+    "tslint-react",
+    "tslint-config-prettier",
+    "tslint-eslint-rules"
+  ],
+  "jsRules": {},
+  "rules": {
+    "member-access": false,
+    "object-literal-sort-keys": false,
+    "no-floating-promises": false,
+    "_jsx-comment": "Lambdas are forbidden in JSX attributes due to their rendering performance impact (jsx-no-lambda)",
+    "jsx-no-lambda": false,
+    "jsx-boolean-value": false
+  },
+  "rulesDirectory": []
+}

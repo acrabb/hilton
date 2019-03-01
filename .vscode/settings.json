@@ -1,0 +1,10 @@
+{
+  "javascript.format.enable": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "tslint.configFile": ".tslint.json",
+  "editor.tabSize": 2,
+  "editor.minimap.showSlider": "always"
+}
