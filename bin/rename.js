@@ -4,9 +4,9 @@ const replace = require('replace-in-file');
 
 const BASE_DIRECTORY = './';
 // TODO rename these
-const DEFAULT_COMPANY_NAME = 'rnf';
-const DEFAULT_PACKAGE_NAME = 'com.rnf.rnfresh';
-const DEFAULT_PROJECT_NAME = 'RNFresh';
+const DEFAULT_COMPANY_NAME = 'rnfts';
+const DEFAULT_PACKAGE_NAME = 'com.rnfts.rnfreshts';
+const DEFAULT_PROJECT_NAME = 'RNFreshTS';
 const VALID_CHARACTERS = /^[a-zA-Z\s]+$/;
 
 const rl = readline.createInterface({
