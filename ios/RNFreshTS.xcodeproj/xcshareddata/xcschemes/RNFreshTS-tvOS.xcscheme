@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "RNFresh-tvOS.app"
-               BlueprintName = "RNFresh-tvOS"
-               ReferencedContainer = "container:RNFresh.xcodeproj">
+               BuildableName = "RNFreshTS-tvOS.app"
+               BlueprintName = "RNFreshTS-tvOS"
+               ReferencedContainer = "container:RNFreshTS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "RNFresh-tvOSTests.xctest"
-               BlueprintName = "RNFresh-tvOSTests"
-               ReferencedContainer = "container:RNFresh.xcodeproj">
+               BuildableName = "RNFreshTS-tvOSTests.xctest"
+               BlueprintName = "RNFreshTS-tvOSTests"
+               ReferencedContainer = "container:RNFreshTS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "RNFresh-tvOSTests.xctest"
-               BlueprintName = "RNFresh-tvOSTests"
-               ReferencedContainer = "container:RNFresh.xcodeproj">
+               BuildableName = "RNFreshTS-tvOSTests.xctest"
+               BlueprintName = "RNFreshTS-tvOSTests"
+               ReferencedContainer = "container:RNFreshTS.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "RNFresh-tvOS.app"
-            BlueprintName = "RNFresh-tvOS"
-            ReferencedContainer = "container:RNFresh.xcodeproj">
+            BuildableName = "RNFreshTS-tvOS.app"
+            BlueprintName = "RNFreshTS-tvOS"
+            ReferencedContainer = "container:RNFreshTS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "RNFresh-tvOS.app"
-            BlueprintName = "RNFresh-tvOS"
-            ReferencedContainer = "container:RNFresh.xcodeproj">
+            BuildableName = "RNFreshTS-tvOS.app"
+            BlueprintName = "RNFreshTS-tvOS"
+            ReferencedContainer = "container:RNFreshTS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "RNFresh-tvOS.app"
-            BlueprintName = "RNFresh-tvOS"
-            ReferencedContainer = "container:RNFresh.xcodeproj">
+            BuildableName = "RNFreshTS-tvOS.app"
+            BlueprintName = "RNFreshTS-tvOS"
+            ReferencedContainer = "container:RNFreshTS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

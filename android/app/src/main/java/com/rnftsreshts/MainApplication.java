@@ -1,4 +1,4 @@
-package com.rnf.rnfresh;
+package com.rnfts.rnfreshts;
 
 import android.app.Application;
 
