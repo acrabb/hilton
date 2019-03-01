@@ -3,9 +3,10 @@ const readline = require('readline');
 const replace = require('replace-in-file');
 
 const BASE_DIRECTORY = './';
-const DEFAULT_COMPANY_NAME = 'invertase';
-const DEFAULT_PACKAGE_NAME = 'com.invertase.rnfirebasestarter';
-const DEFAULT_PROJECT_NAME = 'RNFirebaseStarter';
+// TODO rename these
+const DEFAULT_COMPANY_NAME = 'OLD_COMP_NAME';
+const DEFAULT_PACKAGE_NAME = 'OLD_PACK_NAME';
+const DEFAULT_PROJECT_NAME = 'OLD_PROJ_NAME';
 const VALID_CHARACTERS = /^[a-zA-Z\s]+$/;
 
 const rl = readline.createInterface({

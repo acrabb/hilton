@@ -1,4 +1,4 @@
-package com.rnfresh;
+package com.rnf.rnfresh;
 
 import com.facebook.react.ReactActivity;
 
