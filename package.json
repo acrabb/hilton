@@ -5,7 +5,10 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "rename": "node ./bin/rename.js",
-    "test": "jest"
+    "test": "jest",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "iosx": "react-native run-ios --simulator=\"iPhone X\"",
   },
   "dependencies": {
     "react": "16.6.3",
