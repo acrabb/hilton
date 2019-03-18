@@ -1,4 +1,4 @@
-package com.rnfts.rnfreshts;
+package com.andrecrabb.hilton;
 
 import android.app.Application;
 
