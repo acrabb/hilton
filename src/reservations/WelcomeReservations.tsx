@@ -12,6 +12,10 @@ export default class WelcomeReservations extends Component<Props, {}> {
     super(props)
   }
 
+  componentDidMount() {
+    // TODO load data here so its ready when user hits View
+  }
+
   _onPressCreate = () => {
     this.props.navigation.navigate(Nav.NAV_STACK_CREATE)
   }
