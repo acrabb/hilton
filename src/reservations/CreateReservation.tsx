@@ -1,15 +1,14 @@
 import React, { Component } from "react"
 import { Button, KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native"
+import { NavigationScreenProp } from "react-navigation"
 import uuidv4 from "uuid/v4"
 import Reservation from "./Reservation"
 
 const LableledItem = ({ label, children }) => (
   <View
     style={{
-      // flex: 1,
       flexDirection: "row",
       width: "100%",
-      // backgroundColor: "red",
     }}
   >
     <Text
@@ -26,6 +25,10 @@ const LableledItem = ({ label, children }) => (
   </View>
 )
 
+type Props = {
+  navigation: NavigationScreenProp<any, any>
+}
+
 type State = {
   uuid: string
   userName: string
@@ -34,7 +37,7 @@ type State = {
   departureDate: Date
 }
 
-export default class CreateReservation extends Component<{}, State> {
+export default class CreateReservation extends Component<Props, State> {
   constructor(props) {
     super(props)
 
@@ -124,9 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   dates: {
-    // backgroundColor: "red",
     width: "100%",
-    // height: 100,
   },
   text: {
     fontSize: 16,

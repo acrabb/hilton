@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Button, StyleSheet, Text, View } from "react-native"
+import { NavigationScreenProp } from "react-navigation"
 import * as Nav from "../navigation/navConsts"
 
 type Props = {
@@ -12,10 +13,10 @@ export default class WelcomeReservations extends Component<Props, {}> {
   }
 
   _onPressCreate = () => {
-    this.props.navigation.navigate(Nav.STACK_NAV_CREATE)
+    this.props.navigation.navigate(Nav.NAV_STACK_CREATE)
   }
   _onPressView = () => {
-    this.props.navigation.navigate(Nav.STACK_NAV_VIEW)
+    this.props.navigation.navigate(Nav.NAV_STACK_VIEW)
   }
   render() {
     return (

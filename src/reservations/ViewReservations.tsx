@@ -1,7 +1,12 @@
 import React, { Component } from "react"
 import { StyleSheet, Text, View } from "react-native"
+import { NavigationScreenProp } from "react-navigation"
 
-export default class ViewReservation extends Component {
+type Props = {
+  navigation: NavigationScreenProp<any, any>
+}
+
+export default class ViewReservation extends Component<Props, {}> {
   constructor(props) {
     super(props)
   }

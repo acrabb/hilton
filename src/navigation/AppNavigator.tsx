@@ -6,22 +6,19 @@ import * as Nav from "./navConsts"
 
 const ReservationsStack = createStackNavigator(
   {
-    Welcome: { screen: ReservationsWelcomeScreen },
-    View: { screen: ReservationsViewScreen },
-    Create: { screen: ReservationsCreateScreen },
+    [Nav.NAV_STACK_WELCOME]: { screen: ReservationsWelcomeScreen },
+    [Nav.NAV_STACK_VIEW]: { screen: ReservationsViewScreen },
+    [Nav.NAV_STACK_CREATE]: { screen: ReservationsCreateScreen },
   },
   {
     initialRouteName: Nav.NAV_STACK_WELCOME,
-    // initialRouteParams: {
-    //   showOnboarding: true,
-    // },
   }
 )
 
 export default createAppContainer(
   createSwitchNavigator(
     {
-      SwitchReserve: ReservationsStack,
+      [Nav.NAV_SWITCH_RESERVE]: ReservationsStack,
       // TODO Maybe later
       // SwitchLaunch: createStackNavigator({ Launch: { screen: LaunchScreen } }),
       // SwitchOnboard: createStackNavigator({ Onboarding: { screen: OnboardScreen } }),
