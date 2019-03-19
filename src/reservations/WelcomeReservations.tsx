@@ -34,7 +34,7 @@ export default class WelcomeReservations extends Component<Props, {}> {
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to{"\n"}Hilton Reservations</Text>
         <Text style={styles.instructions}>
-          Would you like to view your reservations,{"\n"}or book a new one?
+          Would you like to view all reservations,{"\n"}or book a new one?
         </Text>
 
         <View style={{ height: 100, justifyContent: "space-evenly" }}>

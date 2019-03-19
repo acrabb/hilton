@@ -14,6 +14,12 @@ import * as Apollo from "../apollo"
 import { LableledItem, NavHeader } from "../components/ui"
 import Reservation from "./Reservation"
 
+enum Errors {
+  nameError = 1,
+  hotelError = 2,
+  datesError = 3,
+}
+
 type Props = {
   navigation: NavigationScreenProp<any, any>
 }
@@ -25,6 +31,7 @@ type State = {
   departureDate: Date
   isDateTimePickerVisible: boolean
   focusedDate: "arrival" | "departure"
+  errors: Errors[]
 }
 
 export default class CreateReservation extends Component<Props, State> {
@@ -44,6 +51,7 @@ export default class CreateReservation extends Component<Props, State> {
       arrivalDate: new Date(),
       departureDate: new Date(),
       isDateTimePickerVisible: false,
+      errors: [],
     }
   }
 
@@ -58,17 +66,29 @@ export default class CreateReservation extends Component<Props, State> {
     let clientName = this.state.clientName.trim()
     if (!clientName || clientName === "") {
       console.warn("Client name must be provided")
-      // TODO color input box red
+      this.setState(previous => ({
+        errors: [Errors.nameError],
+      }))
       return null
     }
     let hotelName = this.state.hotelName.trim()
     if (!hotelName || hotelName === "") {
       console.warn("Hotel name must be provided")
-      // TODO color input box red
+      this.setState(previous => ({
+        errors: [Errors.hotelError],
+      }))
       return null
     }
 
-    console.warn("CREATING new reservation")
+    // TODO check that departure date is after arrival date
+    if (this.state.arrivalDate >= this.state.departureDate) {
+      console.warn("Departure must be after arrival")
+      this.setState(previous => ({
+        errors: [Errors.datesError],
+      }))
+      return null
+    }
+
     let res = new Reservation(
       this.state.clientName,
       this.state.hotelName,
@@ -77,6 +97,10 @@ export default class CreateReservation extends Component<Props, State> {
     )
 
     Apollo.createReservation(res)
+      .then(() => {
+        this.props.navigation.goBack()
+      })
+      .catch(error => console.error(error))
   }
 
   _showDateTimePicker = (whichDate: "arrival" | "departure") => {
@@ -84,13 +108,13 @@ export default class CreateReservation extends Component<Props, State> {
     this.setState(previous => ({
       focusedDate: whichDate,
       isDateTimePickerVisible: true,
+      errors: previous.errors.splice(Errors.datesError),
     }))
   }
 
   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false })
 
   _handleDatePicked = (date: Date, whichDate: string) => {
-    // TODO check that departure date is after arrival date
     console.log("A date has been picked: ", date)
     this._hideDateTimePicker()
     if (whichDate === "arrival") {
@@ -130,26 +154,42 @@ export default class CreateReservation extends Component<Props, State> {
 
           <LableledItem label='Name:'>
             <TextInput
-              style={styles.input}
+              style={[styles.input, this.state.errors.includes(Errors.nameError) ? styles.inputError : null]}
               placeholder="Guest's name..."
-              onChangeText={text => this.setState(previous => ({ clientName: text }))}
+              onChangeText={text =>
+                this.setState(previous => ({
+                  clientName: text,
+                  errors: previous.errors.splice(Errors.nameError),
+                }))
+              }
             />
           </LableledItem>
           <LableledItem label='Hotel:'>
             <TextInput
-              style={styles.input}
+              style={[styles.input, this.state.errors.includes(Errors.hotelError) ? styles.inputError : null]}
               placeholder='Hotel name...'
-              onChangeText={text => this.setState(previous => ({ hotelName: text }))}
+              onChangeText={text =>
+                this.setState(previous => ({
+                  hotelName: text,
+                  errors: previous.errors.splice(Errors.hotelError),
+                }))
+              }
             />
           </LableledItem>
 
           <LableledItem label='Arrival:'>
-            <Text style={[styles.input]} onPress={() => this._showDateTimePicker("arrival")}>
+            <Text
+              style={[styles.input, this.state.errors.includes(Errors.datesError) ? styles.inputError : null]}
+              onPress={() => this._showDateTimePicker("arrival")}
+            >
               {this.state.arrivalDate.toDateString()}
             </Text>
           </LableledItem>
           <LableledItem label='Departure:'>
-            <Text style={[styles.input]} onPress={() => this._showDateTimePicker("departure")}>
+            <Text
+              style={[styles.input, this.state.errors.includes(Errors.datesError) ? styles.inputError : null]}
+              onPress={() => this._showDateTimePicker("departure")}
+            >
               {this.state.departureDate.toDateString()}
             </Text>
           </LableledItem>
@@ -169,6 +209,11 @@ const styles = StyleSheet.create({
   input: {
     width: "80%",
     fontSize: 16,
+    padding: 0, // for Android
+    paddingLeft: 3,
+  },
+  inputError: {
+    backgroundColor: "#ff000044",
     padding: 0, // for Android
   },
 })
