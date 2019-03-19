@@ -1,7 +1,7 @@
-import ApolloClient, { gql } from "apollo-boost"
 import React, { Component } from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { FlatList, NavigationScreenProp } from "react-navigation"
+import * as Apollo from "../apollo"
 import ReservationListItem from "../components/ReservationListItem"
 import { ListSeparator } from "../components/ui"
 import Reservation from "./Reservation"
@@ -24,31 +24,11 @@ export default class ViewReservation extends Component<Props, State> {
   }
 
   componentDidMount() {
-    // TODO
-    // Query from GraphQL - use apollo client
-    const apollo = new ApolloClient({
-      uri: "https://us1.prisma.sh/public-luckox-377/reservation-graphql-backend/dev",
+    Apollo.getReservations().then(data => {
+      this.setState(previous => ({
+        data: data.data.reservations,
+      }))
     })
-    apollo
-      .query({
-        query: gql`
-          query Reservations {
-            reservations {
-              id
-              name
-              hotelName
-              arrivalDate
-              departureDate
-            }
-          }
-        `,
-      })
-      .then(data => {
-        this.setState(previous => ({
-          data: data.data.reservations,
-        }))
-      })
-      .catch(error => console.error(error))
   }
 
   _renderReservationItem = ({ item, index }) => {

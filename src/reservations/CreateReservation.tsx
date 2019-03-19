@@ -10,7 +10,7 @@ import {
 } from "react-native"
 import DateTimePicker from "react-native-modal-datetime-picker"
 import { NavigationScreenProp } from "react-navigation"
-import uuidv4 from "uuid/v4"
+import * as Apollo from "../apollo"
 import { LableledItem } from "../components/ui"
 import Reservation from "./Reservation"
 
@@ -19,7 +19,6 @@ type Props = {
 }
 
 type State = {
-  uuid: string
   clientName: string
   hotelName: string
   arrivalDate: Date
@@ -33,7 +32,6 @@ export default class CreateReservation extends Component<Props, State> {
     super(props)
 
     this.state = {
-      uuid: uuidv4(),
       clientName: "",
       hotelName: "",
       arrivalDate: new Date(),
@@ -47,7 +45,7 @@ export default class CreateReservation extends Component<Props, State> {
     // Query from GraphQL - use apollo client
   }
 
-  _createNewReservation = (): Reservation | null => {
+  _createNewReservation = () => {
     Keyboard.dismiss()
 
     let clientName = this.state.clientName.trim()
@@ -64,13 +62,14 @@ export default class CreateReservation extends Component<Props, State> {
     }
 
     console.warn("CREATING new reservation")
-    return new Reservation(
-      this.state.uuid,
+    let res = new Reservation(
       this.state.clientName,
       this.state.hotelName,
       this.state.arrivalDate.toDateString(),
       this.state.departureDate.toDateString()
     )
+
+    Apollo.createReservation(res)
   }
 
   _showDateTimePicker = (whichDate: "arrival" | "departure") => {
@@ -84,6 +83,7 @@ export default class CreateReservation extends Component<Props, State> {
   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false })
 
   _handleDatePicked = (date: Date, whichDate: string) => {
+    // TODO check that departure date is after arrival date
     console.log("A date has been picked: ", date)
     this._hideDateTimePicker()
     if (whichDate === "arrival") {
