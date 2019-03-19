@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "rename": "node ./bin/rename.js",
     "test": "jest",
     "android": "react-native run-android",
@@ -17,7 +17,7 @@
     "graphql-tag": "^2.10.1",
     "react": "16.6.3",
     "react-native": "0.58.6",
-    "react-native-gesture-handler": "^1.1.0",
+    "react-native-gesture-handler": "^1.0.17",
     "react-navigation": "^3.4.1"
   },
   "devDependencies": {
