@@ -10,7 +10,7 @@ import {
 } from "react-native"
 import DateTimePicker from "react-native-modal-datetime-picker"
 import { NavigationScreenProp } from "react-navigation"
-import * as Apollo from "../../apollo"
+import Apollo from "../../Apollo"
 import { LableledItem, NavHeader } from "../../components/ui"
 import Reservation from "../Reservation"
 
@@ -21,7 +21,7 @@ enum Errors {
 }
 
 type Props = {
-  navigation: NavigationScreenProp<any, any>
+  navigation?: NavigationScreenProp<any, any>
 }
 
 type State = {
@@ -35,14 +35,14 @@ type State = {
 }
 
 export default class CreateReservation extends Component<Props, State> {
-  static navigationOptions = ({ navigation }: NavigationScreenProp<any, any>) => {
+  static navigationOptions = () => {
     return {
       headerTitle: <NavHeader />,
       headerStyle: { borderBottomWidth: 0 /*ios*/, elevation: 0 },
     }
   }
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
 
     this.state = {
@@ -51,16 +51,12 @@ export default class CreateReservation extends Component<Props, State> {
       arrivalDate: new Date(),
       departureDate: new Date(),
       isDateTimePickerVisible: false,
+      focusedDate: "arrival",
       errors: [],
     }
   }
 
-  componentDidMount() {
-    // TODO
-    // Query from GraphQL - use apollo client
-  }
-
-  _createNewReservation = () => {
+  _createNewReservation = (): Reservation => {
     Keyboard.dismiss()
 
     let clientName = this.state.clientName.trim()
@@ -96,11 +92,14 @@ export default class CreateReservation extends Component<Props, State> {
       this.state.departureDate.toDateString()
     )
 
-    Apollo.createReservation(res)
+    Apollo.getInstance()
+      .createReservation(res)
       .then(() => {
         this.props.navigation.goBack()
       })
       .catch(error => console.error(error))
+
+    return res
   }
 
   _showDateTimePicker = (whichDate: "arrival" | "departure") => {
@@ -154,7 +153,10 @@ export default class CreateReservation extends Component<Props, State> {
 
           <LableledItem label='Name:'>
             <TextInput
-              style={[styles.input, this.state.errors.includes(Errors.nameError) ? styles.inputError : null]}
+              style={[
+                styles.input,
+                this.state.errors.indexOf(Errors.nameError) >= 0 ? styles.inputError : null,
+              ]}
               placeholder="Guest's name..."
               onChangeText={text =>
                 this.setState(previous => ({
@@ -166,7 +168,10 @@ export default class CreateReservation extends Component<Props, State> {
           </LableledItem>
           <LableledItem label='Hotel:'>
             <TextInput
-              style={[styles.input, this.state.errors.includes(Errors.hotelError) ? styles.inputError : null]}
+              style={[
+                styles.input,
+                this.state.errors.indexOf(Errors.hotelError) >= 0 ? styles.inputError : null,
+              ]}
               placeholder='Hotel name...'
               onChangeText={text =>
                 this.setState(previous => ({
@@ -179,7 +184,10 @@ export default class CreateReservation extends Component<Props, State> {
 
           <LableledItem label='Arrival:'>
             <Text
-              style={[styles.input, this.state.errors.includes(Errors.datesError) ? styles.inputError : null]}
+              style={[
+                styles.input,
+                this.state.errors.indexOf(Errors.datesError) >= 0 ? styles.inputError : null,
+              ]}
               onPress={() => this._showDateTimePicker("arrival")}
             >
               {this.state.arrivalDate.toDateString()}
@@ -187,7 +195,10 @@ export default class CreateReservation extends Component<Props, State> {
           </LableledItem>
           <LableledItem label='Departure:'>
             <Text
-              style={[styles.input, this.state.errors.includes(Errors.datesError) ? styles.inputError : null]}
+              style={[
+                styles.input,
+                this.state.errors.indexOf(Errors.datesError) >= 0 ? styles.inputError : null,
+              ]}
               onPress={() => this._showDateTimePicker("departure")}
             >
               {this.state.departureDate.toDateString()}

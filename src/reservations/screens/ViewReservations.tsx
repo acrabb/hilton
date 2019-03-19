@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { FlatList, NavigationScreenProp } from "react-navigation"
-import * as Apollo from "../../apollo"
+import Apollo from "../../Apollo"
 import { ListSeparator, NavHeader } from "../../components/ui"
 import Reservation from "../Reservation"
 import ReservationListItem from "../ReservationListItem"
@@ -30,11 +30,13 @@ export default class ViewReservation extends Component<Props, State> {
   }
 
   componentDidMount() {
-    Apollo.getReservations().then(data => {
-      this.setState(previous => ({
-        data: data.data.reservations,
-      }))
-    })
+    Apollo.getInstance()
+      .getReservations()
+      .then(data => {
+        this.setState(previous => ({
+          data: data.data.reservations,
+        }))
+      })
   }
 
   _renderReservationItem = ({ item, index }) => {
