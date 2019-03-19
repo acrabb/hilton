@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import { Button, StyleSheet, Text, View } from "react-native"
 import { NavigationScreenProp } from "react-navigation"
-import { NavHeader } from "../components/ui"
-import * as Nav from "../navigation/navConsts"
+import { NavHeader } from "../../components/ui"
+import * as Nav from "../../navigation/navConsts"
 
 type Props = {
   navigation: NavigationScreenProp<any, any>
@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     textAlign: "center",
     margin: 10,
+    fontWeight: "100",
   },
   instructions: {
     fontSize: 20,

@@ -1,6 +1,6 @@
 import React from "react"
 import { StyleSheet, Text, View } from "react-native"
-import { LableledItem } from "./ui"
+import { LableledItem } from "../components/ui"
 
 type MyProps = {
   id: string

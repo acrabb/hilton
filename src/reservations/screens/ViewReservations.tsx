@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { FlatList, NavigationScreenProp } from "react-navigation"
-import * as Apollo from "../apollo"
-import ReservationListItem from "../components/ReservationListItem"
-import { ListSeparator, NavHeader } from "../components/ui"
-import Reservation from "./Reservation"
+import * as Apollo from "../../apollo"
+import { ListSeparator, NavHeader } from "../../components/ui"
+import Reservation from "../Reservation"
+import ReservationListItem from "../ReservationListItem"
 
 type Props = {
   navigation: NavigationScreenProp<any, any>
@@ -53,7 +53,7 @@ export default class ViewReservation extends Component<Props, State> {
     return (
       <View style={styles.container}>
         {!this.state.data && <Text style={styles.infoText}>Loading reservations...</Text>}
-        {this.state.data && <Text style={styles.infoText}>Here are all the reservations on file...</Text>}
+        {this.state.data && <Text style={styles.infoText}>Here are all the reservations on file.</Text>}
         {this.state.data && (
           <FlatList
             data={this.state.data}
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
   infoText: {
     fontSize: 16,
     padding: 10,
+    textAlign: "center",
     fontWeight: "bold",
   },
 })

@@ -1,7 +1,7 @@
 import { createAppContainer, createStackNavigator, createSwitchNavigator } from "react-navigation"
-import ReservationsCreateScreen from "../reservations/CreateReservation"
-import ReservationsViewScreen from "../reservations/ViewReservations"
-import ReservationsWelcomeScreen from "../reservations/WelcomeReservations"
+import ReservationsCreateScreen from "../reservations/screens/CreateReservation"
+import ReservationsViewScreen from "../reservations/screens/ViewReservations"
+import ReservationsWelcomeScreen from "../reservations/screens/WelcomeReservations"
 import * as Nav from "./navConsts"
 
 const ReservationsStack = createStackNavigator(
