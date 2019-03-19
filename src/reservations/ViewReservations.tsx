@@ -68,6 +68,11 @@ export default class ViewReservation extends Component<Props, State> {
       <View style={styles.container}>
         {!this.state.data && <Text>Loading reservations...</Text>}
         {this.state.data && (
+          <Text style={{ fontSize: 16, padding: 10, fontWeight: "900" }}>
+            Here are all the reservations on file...
+          </Text>
+        )}
+        {this.state.data && (
           <FlatList
             data={this.state.data}
             renderItem={this._renderReservationItem}

@@ -1,5 +1,14 @@
 import React, { Component } from "react"
-import { Button, KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, TextInput } from "react-native"
+import {
+  Button,
+  Keyboard,
+  KeyboardAvoidingView,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+} from "react-native"
+import DateTimePicker from "react-native-modal-datetime-picker"
 import { NavigationScreenProp } from "react-navigation"
 import uuidv4 from "uuid/v4"
 import { LableledItem } from "../components/ui"
@@ -11,10 +20,12 @@ type Props = {
 
 type State = {
   uuid: string
-  userName: string
+  clientName: string
   hotelName: string
   arrivalDate: Date
   departureDate: Date
+  isDateTimePickerVisible: boolean
+  focusedDate: "arrival" | "departure"
 }
 
 export default class CreateReservation extends Component<Props, State> {
@@ -23,10 +34,11 @@ export default class CreateReservation extends Component<Props, State> {
 
     this.state = {
       uuid: uuidv4(),
-      userName: "",
+      clientName: "",
       hotelName: "",
       arrivalDate: new Date(),
       departureDate: new Date(),
+      isDateTimePickerVisible: false,
     }
   }
 
@@ -35,18 +47,62 @@ export default class CreateReservation extends Component<Props, State> {
     // Query from GraphQL - use apollo client
   }
 
-  _createNewReservation = (): Reservation => {
+  _createNewReservation = (): Reservation | null => {
+    Keyboard.dismiss()
+
+    let clientName = this.state.clientName.trim()
+    if (!clientName || clientName === "") {
+      console.warn("Client name must be provided")
+      // TODO color input box red
+      return null
+    }
+    let hotelName = this.state.hotelName.trim()
+    if (!hotelName || hotelName === "") {
+      console.warn("Hotel name must be provided")
+      // TODO color input box red
+      return null
+    }
     return new Reservation(
       this.state.uuid,
-      this.state.userName,
+      this.state.clientName,
       this.state.hotelName,
       this.state.arrivalDate.toDateString(),
       this.state.departureDate.toDateString()
     )
   }
 
-  _onArrivalDateChange = (newDate: Date): void => {
-    console.log(`new date: ${newDate}`)
+  _showDateTimePicker = (whichDate: "arrival" | "departure") => {
+    this.setState(previous => ({
+      focusedDate: whichDate,
+      isDateTimePickerVisible: true,
+    }))
+  }
+
+  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false })
+
+  _handleDatePicked = (date: Date, whichDate: string) => {
+    console.log("A date has been picked: ", date)
+    this._hideDateTimePicker()
+    if (whichDate === "arrival") {
+      this.setState(previous => ({
+        arrivalDate: date,
+      }))
+    }
+    if (whichDate === "departure") {
+      this.setState(previous => ({
+        departureDate: date,
+      }))
+    }
+  }
+
+  getDatePicker(whichDate: "arrival" | "departure") {
+    return (
+      <DateTimePicker
+        onConfirm={date => this._handleDatePicked(date, whichDate)}
+        onCancel={this._hideDateTimePicker}
+        isVisible={this.state.isDateTimePickerVisible}
+      />
+    )
   }
 
   render() {
@@ -54,39 +110,41 @@ export default class CreateReservation extends Component<Props, State> {
       <SafeAreaView
         style={{
           flex: 1,
-          width: "100%",
         }}
       >
+        {this.getDatePicker(this.state.focusedDate)}
         <KeyboardAvoidingView style={styles.container}>
           <Text style={{ fontSize: 16, padding: 10, fontWeight: "900" }}>
             Great! Let's get the details...
           </Text>
 
-          <LableledItem label='Your Name:'>
-            <TextInput style={styles.input} placeholder='Your name...' />
-          </LableledItem>
-          <LableledItem label='Hotel:'>
-            <TextInput style={styles.input} placeholder='Hotel name...' />
-          </LableledItem>
-          <LableledItem label='Arrival:'>
-            <TextInput
-              style={[styles.input, styles.text]}
-              value={this.state.arrivalDate.toDateString()}
-              editable={false}
-            />
-          </LableledItem>
-          <LableledItem label='Departure:'>
+          <LableledItem label='Name:'>
             <TextInput
               style={styles.input}
-              value={this.state.departureDate.toDateString()}
-              editable={false}
+              placeholder="Guest's name..."
+              onChangeText={text => this.setState(previous => ({ clientName: text }))}
             />
           </LableledItem>
-          <Button title='All Done' onPress={this._createNewReservation} />
+          <LableledItem label='Hotel:'>
+            <TextInput
+              style={styles.input}
+              placeholder='Hotel name...'
+              onChangeText={text => this.setState(previous => ({ hotelName: text }))}
+            />
+          </LableledItem>
 
-          {/* {Platform.OS === "ios" && (
-            <DatePickerIOS style={styles.dates} date={new Date()} onDateChange={this._onArrivalDateChange} />
-          )} */}
+          <LableledItem label='Arrival:'>
+            <Text style={[styles.input]} onPress={() => this._showDateTimePicker("arrival")}>
+              {this.state.arrivalDate.toDateString()}
+            </Text>
+          </LableledItem>
+          <LableledItem label='Departure:'>
+            <Text style={[styles.input]} onPress={() => this._showDateTimePicker("departure")}>
+              {this.state.departureDate.toDateString()}
+            </Text>
+          </LableledItem>
+
+          <Button title='All Done' onPress={this._createNewReservation} />
         </KeyboardAvoidingView>
       </SafeAreaView>
     )
@@ -96,8 +154,6 @@ export default class CreateReservation extends Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#F5FCFF",
     padding: 20,
   },
