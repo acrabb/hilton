@@ -67,7 +67,11 @@ export default class ViewReservation extends Component<Props, State> {
           <FlatList
             data={this.state.data}
             renderItem={this._renderReservationItem}
-            keyExtractor={({ item, index }) => item.id}
+            keyExtractor={({ item, index }) => {
+              console.log(`item: ${item}, index: ${index}`)
+              // why undefined?
+              return index
+            }}
           />
         )}
       </View>
@@ -79,7 +83,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#F5FCFF",
   },
 })
