@@ -9,7 +9,7 @@ type Props = {
 }
 
 export default class WelcomeReservations extends Component<Props, {}> {
-  static navigationOptions = ({ navigation }: NavigationScreenProp<any, any>) => {
+  static navigationOptions = () => {
     return {
       headerTitle: <NavHeader />,
       headerStyle: { borderBottomWidth: 0 /*ios*/, elevation: 0 },

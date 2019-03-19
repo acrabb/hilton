@@ -12,7 +12,7 @@ export const NavHeader = () => (
   />
 )
 
-export const LableledItem = ({ label, children }) => (
+export const LableledItem = ({ label, children }: { label: string; children: any }) => (
   <View
     style={{
       flexDirection: "row",

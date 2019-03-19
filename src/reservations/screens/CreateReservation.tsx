@@ -10,7 +10,7 @@ import {
 } from "react-native"
 import DateTimePicker from "react-native-modal-datetime-picker"
 import { NavigationScreenProp } from "react-navigation"
-import Apollo from "../../Apollo"
+import Apollo from "../../apollo"
 import { LableledItem, NavHeader } from "../../components/ui"
 import Reservation from "../Reservation"
 

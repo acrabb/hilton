@@ -15,13 +15,13 @@ type State = {
 }
 
 export default class ViewReservation extends Component<Props, State> {
-  static navigationOptions = ({ navigation }: NavigationScreenProp<any, any>) => {
+  static navigationOptions = () => {
     return {
       headerTitle: <NavHeader />,
       headerStyle: { borderBottomWidth: 0 /*ios*/, elevation: 0 },
     }
   }
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
 
     this.state = {
@@ -39,7 +39,7 @@ export default class ViewReservation extends Component<Props, State> {
       })
   }
 
-  _renderReservationItem = ({ item, index }) => {
+  _renderReservationItem = ({ item }: { item: Reservation }) => {
     return (
       <ReservationListItem
         id={item.id}
