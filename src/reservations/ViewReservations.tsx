@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native"
 import { FlatList, NavigationScreenProp } from "react-navigation"
 import * as Apollo from "../apollo"
 import ReservationListItem from "../components/ReservationListItem"
-import { ListSeparator } from "../components/ui"
+import { ListSeparator, NavHeader } from "../components/ui"
 import Reservation from "./Reservation"
 
 type Props = {
@@ -15,6 +15,12 @@ type State = {
 }
 
 export default class ViewReservation extends Component<Props, State> {
+  static navigationOptions = ({ navigation }: NavigationScreenProp<any, any>) => {
+    return {
+      headerTitle: <NavHeader />,
+      headerStyle: { borderBottomWidth: 0 /*ios*/, elevation: 0 },
+    }
+  }
   constructor(props) {
     super(props)
 
@@ -46,12 +52,8 @@ export default class ViewReservation extends Component<Props, State> {
   render() {
     return (
       <View style={styles.container}>
-        {!this.state.data && <Text>Loading reservations...</Text>}
-        {this.state.data && (
-          <Text style={{ fontSize: 16, padding: 10, fontWeight: "900" }}>
-            Here are all the reservations on file...
-          </Text>
-        )}
+        {!this.state.data && <Text style={styles.infoText}>Loading reservations...</Text>}
+        {this.state.data && <Text style={styles.infoText}>Here are all the reservations on file...</Text>}
         {this.state.data && (
           <FlatList
             data={this.state.data}
@@ -69,6 +71,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#F5FCFF",
+  },
+  infoText: {
+    fontSize: 16,
+    padding: 10,
+    fontWeight: "bold",
   },
 })

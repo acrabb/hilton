@@ -21,13 +21,13 @@ export default class ReservationListItem extends React.Component<MyProps, {}> {
 
     return (
       <View style={[styles.container, this.props.style]}>
-        <LableledItem label='Name'>
+        <LableledItem label='Name:'>
           <Text style={stys}>{this.props.clientName}</Text>
         </LableledItem>
-        <LableledItem label='Hotel'>
+        <LableledItem label='Hotel:'>
           <Text style={stys}>{this.props.hotelName}</Text>
         </LableledItem>
-        <LableledItem label='Dates'>
+        <LableledItem label='Dates:'>
           <Text style={stys}>
             {this.props.arrivalDate} - {this.props.departureDate}
           </Text>
@@ -43,6 +43,5 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    // padding: 10,
   },
 })

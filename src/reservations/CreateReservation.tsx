@@ -11,7 +11,7 @@ import {
 import DateTimePicker from "react-native-modal-datetime-picker"
 import { NavigationScreenProp } from "react-navigation"
 import * as Apollo from "../apollo"
-import { LableledItem } from "../components/ui"
+import { LableledItem, NavHeader } from "../components/ui"
 import Reservation from "./Reservation"
 
 type Props = {
@@ -28,6 +28,13 @@ type State = {
 }
 
 export default class CreateReservation extends Component<Props, State> {
+  static navigationOptions = ({ navigation }: NavigationScreenProp<any, any>) => {
+    return {
+      headerTitle: <NavHeader />,
+      headerStyle: { borderBottomWidth: 0 /*ios*/, elevation: 0 },
+    }
+  }
+
   constructor(props) {
     super(props)
 
@@ -117,7 +124,7 @@ export default class CreateReservation extends Component<Props, State> {
       >
         {this.getDatePicker(this.state.focusedDate)}
         <KeyboardAvoidingView style={styles.container}>
-          <Text style={{ fontSize: 16, padding: 10, fontWeight: "900" }}>
+          <Text style={{ fontSize: 16, padding: 10, fontWeight: "bold" }}>
             Great! Let's get the details...
           </Text>
 
@@ -157,15 +164,11 @@ export default class CreateReservation extends Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5FCFF",
     padding: 20,
   },
   input: {
-    // padding: 5,
     width: "80%",
     fontSize: 16,
-  },
-  dates: {
-    width: "100%",
+    padding: 0, // for Android
   },
 })

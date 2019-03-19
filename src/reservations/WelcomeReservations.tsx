@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Button, StyleSheet, Text, View } from "react-native"
 import { NavigationScreenProp } from "react-navigation"
+import { NavHeader } from "../components/ui"
 import * as Nav from "../navigation/navConsts"
 
 type Props = {
@@ -8,6 +9,12 @@ type Props = {
 }
 
 export default class WelcomeReservations extends Component<Props, {}> {
+  static navigationOptions = ({ navigation }: NavigationScreenProp<any, any>) => {
+    return {
+      headerTitle: <NavHeader />,
+      headerStyle: { borderBottomWidth: 0 /*ios*/, elevation: 0 },
+    }
+  }
   constructor(props: Props) {
     super(props)
   }
@@ -25,13 +32,15 @@ export default class WelcomeReservations extends Component<Props, {}> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to Hilton Reservations</Text>
+        <Text style={styles.welcome}>Welcome to{"\n"}Hilton Reservations</Text>
         <Text style={styles.instructions}>
           Would you like to view your reservations,{"\n"}or book a new one?
         </Text>
 
-        <Button title='View' onPress={this._onPressView} />
-        <Button title='Create' onPress={this._onPressCreate} />
+        <View style={{ height: 100, justifyContent: "space-evenly" }}>
+          <Button title='View Reservations' onPress={this._onPressView} />
+          <Button title='Create Reservation' onPress={this._onPressCreate} />
+        </View>
       </View>
     )
   }
@@ -40,18 +49,23 @@ export default class WelcomeReservations extends Component<Props, {}> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
-    backgroundColor: "#F5FCFF",
+    backgroundColor: "#ffffff",
+    padding: 10,
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 40,
     textAlign: "center",
     margin: 10,
   },
   instructions: {
+    fontSize: 20,
     textAlign: "center",
     color: "#333333",
     marginBottom: 5,
+  },
+  button: {
+    padding: 5,
   },
 })

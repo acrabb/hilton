@@ -1,10 +1,22 @@
 import React from "react"
-import { Text, View } from "react-native"
+import { Image, Text, View } from "react-native"
+
+export const NavHeader = () => (
+  <Image
+    source={require("../../assets/hilton_2017_logo.png")}
+    style={{
+      width: "50%",
+      height: "100%",
+      resizeMode: "contain",
+    }}
+  />
+)
 
 export const LableledItem = ({ label, children }) => (
   <View
     style={{
       flexDirection: "row",
+      alignItems: "center",
       width: "100%",
       padding: 5,
     }}
