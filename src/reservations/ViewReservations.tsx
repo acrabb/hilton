@@ -2,6 +2,7 @@ import ApolloClient, { gql } from "apollo-boost"
 import React, { Component } from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { FlatList, NavigationScreenProp } from "react-navigation"
+import ReservationListItem from "../components/ReservationListItem"
 import Reservation from "./Reservation"
 
 type Props = {
@@ -42,8 +43,6 @@ export default class ViewReservation extends Component<Props, State> {
         `,
       })
       .then(data => {
-        console.log(`got data`)
-        console.log(data.data.reservations)
         this.setState(previous => ({
           data: data.data.reservations,
         }))
@@ -53,9 +52,13 @@ export default class ViewReservation extends Component<Props, State> {
 
   _renderReservationItem = ({ item, index }) => {
     return (
-      <Text>
-        {item.name}, {item.hotelName}
-      </Text>
+      <ReservationListItem
+        id={item.id}
+        clientName={item.name}
+        hotelName={item.hotelName}
+        arrivalDate={item.arrivalDate}
+        departureDate={item.departureDate}
+      />
     )
   }
 

@@ -1,29 +1,9 @@
 import React, { Component } from "react"
-import { Button, KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native"
+import { Button, KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, TextInput } from "react-native"
 import { NavigationScreenProp } from "react-navigation"
 import uuidv4 from "uuid/v4"
+import { LableledItem } from "../components/ui"
 import Reservation from "./Reservation"
-
-const LableledItem = ({ label, children }) => (
-  <View
-    style={{
-      flexDirection: "row",
-      width: "100%",
-    }}
-  >
-    <Text
-      style={{
-        padding: 5,
-        width: "30%",
-        textAlign: "right",
-        ...styles.text,
-      }}
-    >
-      {label}
-    </Text>
-    {children}
-  </View>
-)
 
 type Props = {
   navigation: NavigationScreenProp<any, any>
@@ -78,7 +58,7 @@ export default class CreateReservation extends Component<Props, State> {
         }}
       >
         <KeyboardAvoidingView style={styles.container}>
-          <Text style={{ ...styles.text, padding: 10, fontWeight: "900" }}>
+          <Text style={{ fontSize: 16, padding: 10, fontWeight: "900" }}>
             Great! Let's get the details...
           </Text>
 
@@ -122,14 +102,11 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   input: {
-    padding: 5,
+    // padding: 5,
     width: "80%",
     fontSize: 16,
   },
   dates: {
     width: "100%",
-  },
-  text: {
-    fontSize: 16,
   },
 })
