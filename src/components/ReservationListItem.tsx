@@ -29,7 +29,7 @@ export default class ReservationListItem extends React.Component<MyProps, {}> {
         </LableledItem>
         <LableledItem label='Dates'>
           <Text style={stys}>
-            {this.props.arrivalDate}-{this.props.departureDate}
+            {this.props.arrivalDate} - {this.props.departureDate}
           </Text>
         </LableledItem>
       </View>

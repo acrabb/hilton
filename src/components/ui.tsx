@@ -23,3 +23,21 @@ export const LableledItem = ({ label, children }) => (
     {children}
   </View>
 )
+
+export const ListSeparator = () => (
+  <View
+    style={{
+      backgroundColor: "transparent",
+    }}
+  >
+    <View
+      style={{
+        height: 1,
+        width: "86%",
+        backgroundColor: "black",
+        opacity: 0.2,
+        marginLeft: "14%",
+      }}
+    />
+  </View>
+)

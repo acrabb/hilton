@@ -3,6 +3,7 @@ import React, { Component } from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { FlatList, NavigationScreenProp } from "react-navigation"
 import ReservationListItem from "../components/ReservationListItem"
+import { ListSeparator } from "../components/ui"
 import Reservation from "./Reservation"
 
 type Props = {
@@ -71,6 +72,7 @@ export default class ViewReservation extends Component<Props, State> {
             data={this.state.data}
             renderItem={this._renderReservationItem}
             keyExtractor={(item, index) => item.id}
+            ItemSeparatorComponent={ListSeparator}
           />
         )}
       </View>
