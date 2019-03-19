@@ -10,7 +10,7 @@ import {
 } from "react-native"
 import DateTimePicker from "react-native-modal-datetime-picker"
 import { NavigationScreenProp } from "react-navigation"
-import Apollo from "../../apollo"
+import Apollo from "../../Apollo"
 import { LableledItem, NavHeader } from "../../components/ui"
 import Reservation from "../Reservation"
 
@@ -92,10 +92,11 @@ export default class CreateReservation extends Component<Props, State> {
       this.state.departureDate.toDateString()
     )
 
+    // TODO DON'T actually create one during unit tests
     Apollo.getInstance()
       .createReservation(res)
       .then(() => {
-        this.props.navigation.goBack()
+        this.props.navigation && this.props.navigation.goBack()
       })
       .catch(error => console.error(error))
 
@@ -114,7 +115,6 @@ export default class CreateReservation extends Component<Props, State> {
   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false })
 
   _handleDatePicked = (date: Date, whichDate: string) => {
-    console.log("A date has been picked: ", date)
     this._hideDateTimePicker()
     if (whichDate === "arrival") {
       this.setState(previous => ({
@@ -151,6 +151,7 @@ export default class CreateReservation extends Component<Props, State> {
             Great! Let's get the details...
           </Text>
 
+          {/* TODO can pull out into LabeledTextInput component */}
           <LableledItem label='Name:'>
             <TextInput
               style={[
@@ -166,6 +167,7 @@ export default class CreateReservation extends Component<Props, State> {
               }
             />
           </LableledItem>
+
           <LableledItem label='Hotel:'>
             <TextInput
               style={[
@@ -182,6 +184,7 @@ export default class CreateReservation extends Component<Props, State> {
             />
           </LableledItem>
 
+          {/* TODO can pull out into LabeledText component */}
           <LableledItem label='Arrival:'>
             <Text
               style={[
@@ -193,6 +196,7 @@ export default class CreateReservation extends Component<Props, State> {
               {this.state.arrivalDate.toDateString()}
             </Text>
           </LableledItem>
+
           <LableledItem label='Departure:'>
             <Text
               style={[
