@@ -3,7 +3,17 @@
  * @lint-ignore-every XPLATJSCOPYRIGHT1
  */
 
+import { configure, mount, shallow } from "enzyme"
+import Adapter from "enzyme-adapter-react-16"
+import React from "react"
+import "react-native"
 import CreateReservation from "../src/reservations/screens/CreateReservation"
+
+describe("showing the date picker", () => {
+  it("renders", () => {
+    shallow(<CreateReservation />)
+  })
+})
 
 describe("createReservation", () => {
   let createScreen: CreateReservation
@@ -75,25 +85,24 @@ describe("createReservation", () => {
 })
 
 describe("showing the date picker", () => {
-  let createScreen: CreateReservation
-  beforeEach(() => {
-    createScreen = new CreateReservation({})
-  })
+  configure({ adapter: new Adapter() })
 
-  it("toggles the date picker flag", () => {
-    createScreen.state = {
-      clientName: "",
+  let createScreen = mount<CreateReservation>(<CreateReservation />)
+
+  it("toggles the date picker flag", done => {
+    createScreen.setState(() => ({
+      clientName: "Paris",
       hotelName: "Hilton Hi",
       arrivalDate: new Date(),
       departureDate: new Date(),
       isDateTimePickerVisible: false,
       focusedDate: "arrival",
       errors: [3],
-    }
+    }))
 
-    createScreen._showDateTimePicker("departure")
-    expect(createScreen.state.isDateTimePickerVisible).toBeTruthy()
-    expect(createScreen.state.focusedDate).toEqual("departure")
-    expect(createScreen.state.errors).toHaveLength(0)
+    createScreen.instance()._showDateTimePicker("departure")
+    expect(createScreen.state().isDateTimePickerVisible).toBeTruthy()
+    expect(createScreen.state().focusedDate).toEqual("departure")
+    expect(createScreen.state().errors).toHaveLength(0)
   })
 })

@@ -12,11 +12,16 @@
     "lint": "tslint 'source/**/*.{ts,tsx}'"
   },
   "dependencies": {
+    "@types/enzyme": "^3.9.1",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
     "apollo-boost": "^0.3.1",
     "cross-fetch": "^3.0.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "react": "16.6.3",
+    "react-dom": "^16.8.4",
     "react-native": "0.58.6",
     "react-native-gesture-handler": "^1.0.17",
     "react-native-modal-datetime-picker": "^6.1.0",
@@ -51,7 +56,7 @@
     ],
     "transform": {
       "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
-      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
     "testPathIgnorePatterns": [
