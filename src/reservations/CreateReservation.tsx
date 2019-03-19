@@ -62,6 +62,8 @@ export default class CreateReservation extends Component<Props, State> {
       // TODO color input box red
       return null
     }
+
+    console.warn("CREATING new reservation")
     return new Reservation(
       this.state.uuid,
       this.state.clientName,
@@ -72,6 +74,7 @@ export default class CreateReservation extends Component<Props, State> {
   }
 
   _showDateTimePicker = (whichDate: "arrival" | "departure") => {
+    Keyboard.dismiss()
     this.setState(previous => ({
       focusedDate: whichDate,
       isDateTimePickerVisible: true,
